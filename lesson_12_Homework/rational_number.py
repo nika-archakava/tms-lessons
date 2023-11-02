@@ -12,7 +12,7 @@ class Rational:
         return self.__denominator
 
     def __str__(self):
-        return f'{self.numerator}/{self.denominator}'
+        return f'{self.__numerator}/{self.__denominator}'
 
     def __mul__(self, other) -> 'Rational':
         return Rational(self.numerator * other.numerator, self.denominator * other.denominator)
@@ -30,10 +30,37 @@ class Rational:
         new_denominator = self.denominator * other.denominator
         return Rational(new_numerator, new_denominator)
 
+    def __lt__(self, other):
+        return self.numerator * other.denominator < other.numerator * self.denominator
+
+    def __le__(self, other):
+        return self.numerator * other.denominator <= other.numerator * self.denominator
+
+    def __eq__(self, other):
+        return self.numerator * other.denominator == other.numerator * self.denominator
+
+    def __ne__(self, other):
+        return self.numerator * other.denominator != other.numerator * self.denominator
+
+    def __gt__(self, other):
+        return self.numerator * other.denominator > other.numerator * self.denominator
+
+    def __ge__(self, other):
+        return self.numerator * other.denominator >= other.numerator * self.denominator
+
+    @property
     def normalise(self):
-        dels = []
-        for i in range(2, min(self.numerator, self.denominator) + 1):
-            if self.numerator % i == 0 and self.denominator % i == 0:
-                dels.append(i)
-        nod = max(dels)
-        return Rational(int(self.numerator / nod), int(self.denominator / nod))
+        nod = max([i for i in range(2, min(self.__numerator, self.__denominator) + 1) if
+                   self.__numerator % i == 0 and self.__denominator % i == 0])
+        if self.__denominator >= 0 > self.__numerator or self.__numerator >= 0 > self.__denominator:
+            return Rational(int(-abs(self.__numerator / nod)), int(abs(self.__denominator / nod)))
+        else:
+            return Rational(int(abs(self.__numerator / nod)), int(abs(self.__denominator / nod)))
+
+
+a = Rational(1, 4)
+b = Rational(3, 2)
+c = Rational(1, 8)
+d = Rational(156, 100)
+assert (a * (b + c) + d).normalise == Rational(1573, 800)
+print((a * (b + c) + d).normalise)
