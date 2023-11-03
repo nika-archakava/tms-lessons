@@ -12,7 +12,7 @@ class Rational:
         return self.__denominator
 
     def __str__(self):
-        return f'{self.__numerator}/{self.__denominator}'
+        return f'{self.normalise.__numerator}/{self.normalise.__denominator}'
 
     def __mul__(self, other) -> 'Rational':
         return Rational(self.numerator * other.numerator, self.denominator * other.denominator)
@@ -62,5 +62,6 @@ a = Rational(1, 4)
 b = Rational(3, 2)
 c = Rational(1, 8)
 d = Rational(156, 100)
-assert (a * (b + c) + d).normalise == Rational(1573, 800)
-print((a * (b + c) + d).normalise)
+assert (a * (b + c) + d) == Rational(1573, 800)
+print((a * (b + c) + d))
+print(Rational(2,4))
