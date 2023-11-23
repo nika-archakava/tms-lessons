@@ -41,7 +41,7 @@ class JoinTwoWords(unittest.TestCase):
 
         self.assertEqual(result, 'Hi-Veranika')
 
-    def test_exception(self):
+    def test_exception(dfvgdfvbdfvdself):
         with self.assertRaises(TypeError):
             join_words('hello', 'hey', 'Good_afternoon')
 
